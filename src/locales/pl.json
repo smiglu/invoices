@@ -1,0 +1,29 @@
+{
+  "common" : {
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "additional": "Dodatkowe",
+    "back": "Powrót"
+  },
+  "contractors" : {
+    "header": "Kontrahenci",
+    "headerList": "Lista kontrahentów",
+    "createContractor": "Stwórz kontrahenta",
+    "name": "Nazwa",
+    "companyName": "Nazwa firmy",
+    "zipCode": "Kod pocztowy",
+    "placeOfMail": "Poczta",
+    "address": "Adres",
+    "nipNumber": "Numer NIP",
+    "representation": "Reprezentant",
+    "documentName": "Nazwa dokumentu",
+    "idCard": "Dowód osobisty",
+    "passport": "Paszport",
+    "others": "Inne",
+    "seriesAndNumber": "Seria i numer dokumentu",
+    "documentReleaseDate": "Data wydania",
+    "nameOfTheAuthority": "Nazwa organu wydającego",
+    "bankName": "Nazwa banku",
+    "accountNumber": "Numer konta"
+  }
+}

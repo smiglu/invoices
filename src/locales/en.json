@@ -1,0 +1,29 @@
+{
+  "common" : {
+    "save": "Save",
+    "cancel": "Cancel",
+    "additional": "Additional",
+    "back": "Back"
+  },
+  "contractors" : {
+    "header": "Contractors",
+    "headerList": "Contractor list",
+    "createContractor": "Create contractor",
+    "name": "Name",
+    "companyName": "Company name",
+    "zipCode": "Zip code",
+    "placeOfMail": "Place of mail",
+    "address": "Address",
+    "nipNumber": "NIP number",
+    "representation": "Representation",
+    "documentName": "Document name",
+    "idCard": "ID card",
+    "passport": "Passport",
+    "others": "Others",
+    "seriesAndNumber": "Series and number",
+    "documentReleaseDate": "Date of issue of the document",
+    "nameOfTheAuthority": "Issuing authority name",
+    "bankName": "Nazwa banku",
+    "accountNumber": "Numer konta"
+  }
+}
