@@ -297,7 +297,6 @@
             for (let i = 0; i < weightCount; i++) {
                 sum += (parseInt(nip.substr(i, 1)) * weight[i]);
             }
-
             return sum % 11 === controlNumber;
         }
     }
