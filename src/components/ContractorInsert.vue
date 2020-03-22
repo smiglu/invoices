@@ -276,10 +276,29 @@
 
         public async onSubmit() {
             const db: RxContractorsDatabase = await DatabaseService.getContractors();
+            if (this.formObject.nipNumber) {
+                if (!ContractorInsert.isValidNip(this.formObject.nipNumber)) {
+                    alert("Błędny NIP");
+                }
+            }
             await db.contractors.insert(this.formObject);
 
             this.name = '';
             this.dialog = false;
+        }
+
+        private static isValidNip(nip : string) {
+            nip = nip.replace(/[ \-]/gi, '');
+
+            let weight = [6, 5, 7, 2, 3, 4, 5, 6, 7];
+            let sum = 0;
+            let controlNumber = parseInt(nip.substring(9, 10));
+            let weightCount = weight.length;
+            for (let i = 0; i < weightCount; i++) {
+                sum += (parseInt(nip.substr(i, 1)) * weight[i]);
+            }
+
+            return sum % 11 === controlNumber;
         }
     }
 </script>
