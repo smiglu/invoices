@@ -329,7 +329,6 @@ export default class ContractorEdit extends Vue {
   }
 
   public async submit() {
-    //await this.contractor.atomicSet('companyName', this.formData);
     await this.contractor.update({
       $set: {
         name :  this.formData.name,
