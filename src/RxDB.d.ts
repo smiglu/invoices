@@ -12,26 +12,26 @@ export interface RxHeroDocumentType {
     hp: number;
     team?: string;
     skills: Array<{
-        name?: string,
-        damage?: string
+        name?: string;
+        damage?: string;
     }>;
 }
 
 export interface RxContractorDocumentType {
-    name: string,
-    companyName: string,
-    pesel: string,
-    zipCode: string,
-    placeOfMail: string,
-    address: string,
-    nipNumber: string,
-    representation: string,
-    documentName: string,
-    seriesAndNumber: string,
-    documentReleaseDate: string,
-    nameOfTheAuthority: string,
-    bankName: string,
-    accountNumber: string
+    name: string;
+    companyName: string;
+    pesel: string;
+    zipCode: string;
+    placeOfMail: string;
+    address: string;
+    nipNumber: string;
+    representation: string;
+    documentName: string;
+    seriesAndNumber: string;
+    documentReleaseDate: string;
+    nameOfTheAuthority: string;
+    bankName: string;
+    accountNumber: string;
 }
 
 // ORM methods
