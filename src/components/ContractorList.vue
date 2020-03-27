@@ -88,7 +88,6 @@
         }
 
         private editContractor(contractor: RxContractorDocument) {
-            //this.$vuetify.theme.dark = true;
             this.$emit('edit', contractor);
         }
     }

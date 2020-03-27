@@ -22,9 +22,8 @@
             ContractorEdit
         }
     })
-    export default class Home extends Vue {
+    export default class Contractors extends Vue {
         private edit: RxContractorDocument | null = null;
-        private dialog: boolean = false;
 
         private editContractor(contractor: RxContractorDocument) {
             this.edit = contractor;

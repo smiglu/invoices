@@ -40,7 +40,7 @@
                                         >
                                     </v-avatar>
                                     <v-text-field
-                                        v-model="formObject.name"
+                                        v-model="formData.name"
                                         v-bind:placeholder="$t('contractors.name')"
                                     />
                                 </v-row>
@@ -49,40 +49,40 @@
                                 cols="12"
                             >
                                 <v-text-field
-                                    v-model="formObject.companyName"
+                                    v-model="formData.companyName"
                                     v-bind:placeholder="$t('contractors.companyName')"
                                 />
                             </v-col>
                             <v-row>
                                 <v-col cols="6">
                                     <v-text-field
-                                        v-model="formObject.zipCode"
+                                        v-model="formData.zipCode"
                                         v-bind:placeholder="$t('contractors.zipCode')"
                                     />
                                 </v-col>
                                 <v-col cols="6">
                                     <v-text-field
-                                        v-model="formObject.placeOfMail"
+                                        v-model="formData.placeOfMail"
                                         v-bind:placeholder="$t('contractors.placeOfMail')"
                                     />
                                 </v-col>
                             </v-row>
                             <v-col cols="12">
                                 <v-text-field
-                                    v-model="formObject.address"
+                                    v-model="formData.address"
                                     v-bind:placeholder="$t('contractors.address')"
                                 />
                             </v-col>
                             <v-row>
                                 <v-col cols="6">
                                     <v-text-field
-                                        v-model="formObject.nipNumber"
+                                        v-model="formData.nipNumber"
                                         v-bind:placeholder="$t('contractors.nipNumber')"
                                     />
                                 </v-col>
                                 <v-col cols="6">
                                     <v-text-field
-                                        v-model="formObject.representation"
+                                        v-model="formData.representation"
                                         v-bind:placeholder="$t('contractors.representation')"
                                     />
                                 </v-col>
@@ -91,13 +91,13 @@
                                 <v-col cols="6">
                                     <v-select
                                         :items="documentsType"
-                                        v-model="formObject.documentName"
+                                        v-model="formData.documentName"
                                         v-bind:label="$t('contractors.documentName')"
                                     ></v-select>
                                 </v-col>
                                 <v-col cols="6">
                                     <v-text-field
-                                        v-model="formObject.seriesAndNumber"
+                                        v-model="formData.seriesAndNumber"
                                         v-bind:placeholder="$t('contractors.seriesAndNumber')"
                                     />
                                 </v-col>
@@ -114,19 +114,19 @@
                                     >
                                         <template v-slot:activator="{ on }">
                                             <v-text-field
-                                                v-model="formObject.documentReleaseDate"
+                                                v-model="formData.documentReleaseDate"
                                                 v-bind:label="$t('contractors.documentReleaseDate')"
                                                 prepend-icon="mdi-calendar"
                                                 readonly
                                                 v-on="on"
                                             ></v-text-field>
                                         </template>
-                                        <v-date-picker v-model="formObject.documentReleaseDate" @input="menuDate = false"></v-date-picker>
+                                        <v-date-picker v-model="formData.documentReleaseDate" @input="menuDate = false"></v-date-picker>
                                     </v-menu>
                                 </v-col>
                                 <v-col cols="7">
                                     <v-text-field
-                                        v-model="formObject.nameOfTheAuthority"
+                                        v-model="formData.nameOfTheAuthority"
                                         v-bind:placeholder="$t('contractors.nameOfTheAuthority')"
                                     />
                                 </v-col>
@@ -134,13 +134,13 @@
                             <v-row>
                                 <v-col cols="5">
                                     <v-text-field
-                                        v-model="formObject.bankName"
+                                        v-model="formData.bankName"
                                         v-bind:label="$t('contractors.bankName')"
                                     />
                                 </v-col>
                                 <v-col cols="7">
                                     <v-text-field
-                                        v-model="formObject.accountNumber"
+                                        v-model="formData.accountNumber"
                                         v-bind:placeholder="$t('contractors.accountNumber')"
                                     />
                                 </v-col>
@@ -242,7 +242,7 @@
     @Component({})
     export default class ContractorInsert extends Vue {
         private name: string = '';
-        private formObject = {
+        private formData = {
             name : '',
             companyName : '',
             pesel : '',
@@ -276,26 +276,26 @@
 
         public async onSubmit() {
             const db: RxContractorsDatabase = await DatabaseService.getContractors();
-            if (this.formObject.nipNumber) {
-                if (!ContractorInsert.isValidNip(this.formObject.nipNumber)) {
-                    alert("Błędny NIP");
+            if (this.formData.nipNumber) {
+                if (!this.isValidNip(this.formData.nipNumber)) {
+                    alert('Błędny NIP');
                 }
             }
-            await db.contractors.insert(this.formObject);
+            await db.contractors.insert(this.formData);
 
             this.name = '';
             this.dialog = false;
         }
 
-        private static isValidNip(nip : string) {
+        public isValidNip(nip: string) {
             nip = nip.replace(/[ \-]/gi, '');
 
-            let weight = [6, 5, 7, 2, 3, 4, 5, 6, 7];
+            const weight = [6, 5, 7, 2, 3, 4, 5, 6, 7];
             let sum = 0;
-            let controlNumber = parseInt(nip.substring(9, 10));
-            let weightCount = weight.length;
+            const controlNumber = parseInt(nip.substring(9, 10), 10);
+            const weightCount = weight.length;
             for (let i = 0; i < weightCount; i++) {
-                sum += (parseInt(nip.substr(i, 1)) * weight[i]);
+                sum += (parseInt(nip.substr(i, 1), 10) * weight[i]);
             }
             return sum % 11 === controlNumber;
         }
