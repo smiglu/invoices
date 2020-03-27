@@ -2,8 +2,7 @@
  * custom typings so typescript knows about the schema-fields
  */
 
-import { RxDocument, RxCollection, RxDatabase } from 'rxdb';
-import { Observable } from 'rxjs';
+import {RxCollection, RxDatabase, RxDocument} from 'rxdb';
 
 export interface RxHeroDocumentType {
     name: string;
