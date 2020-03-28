@@ -13,8 +13,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import randomInt from 'random-int';
-import DatabaseService from '../services/Database.service';
-import { RxHeroDocument, RxHeroesDatabase } from '../RxDB';
+import DatabaseService from '../../services/Database.service';
+import { RxHeroDocument, RxHeroesDatabase } from '../../RxDB';
 
 
 @Component({})

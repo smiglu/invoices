@@ -236,7 +236,7 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import DatabaseService from '../services/Database.service';
+    import DatabaseService from '../../services/Database.service';
     import {RxContractorsDatabase} from '@/RxDB';
 
     @Component({})

@@ -16,9 +16,9 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { RxHeroDocument } from '../RxDB';
 
-import HeroList from '../components/HeroList.vue';
-import HeroInsert from '../components/HeroInsert.vue';
-import HeroEdit from '../components/HeroEdit.vue';
+import HeroList from '../components/hero/HeroList.vue';
+import HeroInsert from '../components/hero/HeroInsert.vue';
+import HeroEdit from '../components/hero/HeroEdit.vue';
 
 @Component({
   components: {

@@ -19,8 +19,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import DatabaseService from '../services/Database.service';
-import { RxHeroDocument, RxHeroesDatabase } from '../RxDB';
+import DatabaseService from '../../services/Database.service';
+import { RxHeroDocument, RxHeroesDatabase } from '../../RxDB';
 import { filter, first, map, debounce, startWith, tap } from 'rxjs/operators';
 import { timer, Subscription } from 'rxjs';
 

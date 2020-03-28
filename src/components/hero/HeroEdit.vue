@@ -35,12 +35,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import DatabaseService from '../services/Database.service';
-import { RxHeroDocument, RxHeroesDatabase } from '../RxDB';
-import { skip, map, first } from 'rxjs/operators';
+  import {Component, Prop, Vue} from 'vue-property-decorator';
+  import {RxHeroDocument} from '@/RxDB';
+  import {first, map, skip} from 'rxjs/operators';
 
-@Component({})
+  @Component({})
 export default class HeroEdit extends Vue {
   @Prop() private hero!: RxHeroDocument;
 

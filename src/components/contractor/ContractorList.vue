@@ -43,7 +43,7 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import DatabaseService from '../services/Database.service';
+    import DatabaseService from '../../services/Database.service';
     import {RxContractorDocument} from '@/RxDB';
     import {tap} from 'rxjs/operators';
     import {Subscription} from 'rxjs';
