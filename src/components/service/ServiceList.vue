@@ -1,7 +1,7 @@
 <template>
-    <div class="contractor-list">
+    <div class="service-list">
         <v-card-title>
-            {{$t('contractors.header')}}
+            {{$t('services.header')}}
             <v-spacer></v-spacer>
             <v-text-field
                     v-model="search"
@@ -14,10 +14,11 @@
         </v-card-title>
         <v-data-table
                 :headers="headers"
-                :items="contractors"
+                :items="services"
                 :search="search"
                 :loading="loading"
-                loading-text="Ladowanie... Proszę czekać"
+                loading-text="Loading... Please wait"
+                :pagination.sync="pagination"
                 :footer-props="{
                     showFirstLastPage: true,
                     itemsPerPageText: 'Liczba elementów na stronie:'
@@ -27,13 +28,13 @@
                 <v-icon
                         small
                         class="mr-2"
-                        @click="editContractor(item)"
+                        @click="editService(item)"
                 >
                     mdi-pencil
                 </v-icon>
                 <v-icon
                         small
-                        @click="removeContractor(item)"
+                        @click="removeService(item)"
                 >
                     mdi-delete
                 </v-icon>
@@ -48,31 +49,31 @@
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
     import DatabaseService from '../../services/Database.service';
-    import {RxContractorDocument} from '@/RxDB';
+    import {RxServiceDocument} from '@/RxDB';
     import {Subscription} from 'rxjs';
 
     @Component({})
-    export default class ContractorList extends Vue {
+    export default class ServiceList extends Vue {
         private loading: boolean = true;
-        private contractors: RxContractorDocument[] = [];
+        private services: RxServiceDocument[] = [];
         private sub: Subscription | null = null;
         private search: string = '';
         private headers = [
-            {text: `${this.$root.$t('contractors.name')}`, value: 'name'},
-            {text: `${this.$root.$t('contractors.companyName')}`, value: 'companyName'},
-            {text: `${this.$root.$t('contractors.nipNumber')}`, value: 'nipNumber'},
+            {text: `${this.$root.$t('services.name')}`, value: 'name'},
+            {text: `${this.$root.$t('services.price')}`, value: 'price'},
+            {text: `${this.$root.$t('services.unit')}`, value: 'unit'},
             {text: `${this.$root.$t('common.action')}`, value: 'actions', sortable: false}
         ];
 
         public async mounted() {
-            const db = await DatabaseService.getContractors();
-            this.sub = db.contractors
+            const db = await DatabaseService.getServices();
+            this.sub = db.services
                 .find()
-                .sort('name')
-                .$.pipe()
-                .subscribe((contractors: RxContractorDocument[]) => {
+                .$.pipe(
+                )
+                .subscribe((services: RxServiceDocument[]) => {
                     this.loading = false;
-                    this.contractors = contractors;
+                    this.services = services;
                 });
         }
 
@@ -82,12 +83,12 @@
             }
         }
 
-        private removeContractor(contractor: RxContractorDocument) {
-            contractor.remove();
+        private removeService(service: RxServiceDocument) {
+            service.remove();
         }
 
-        private editContractor(contractor: RxContractorDocument) {
-            this.$emit('edit', contractor);
+        private editService(service: RxServiceDocument) {
+            this.$emit('edit', service);
         }
     }
 </script>

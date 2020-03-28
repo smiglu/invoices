@@ -3,7 +3,9 @@
     "save": "Zapisz",
     "cancel": "Anuluj",
     "additional": "Dodatkowe",
-    "back": "Powrót"
+    "back": "Powrót",
+    "action": "Akcje",
+    "search": "Szukaj"
   },
   "contractors" : {
     "header": "Kontrahenci",
@@ -25,5 +27,12 @@
     "nameOfTheAuthority": "Nazwa organu wydającego",
     "bankName": "Nazwa banku",
     "accountNumber": "Numer konta"
+  },
+  "services" : {
+    "header": "Usługi",
+    "headerList": "Lista usług",
+    "name": "Nazwa usługi",
+    "price": "Cena",
+    "unit": "Jednostka"
   }
 }

@@ -1,33 +1,39 @@
 <template>
-  <div class="home">
-    <h1>Lista Kontrahentow</h1>
-    <div id="list-box" class="box">
-      <h3>Heroes</h3>
-      <HeroList v-on:edit="editHero"></HeroList>
-    </div>
-    <ServiceInsert></ServiceInsert>
-  </div>
+    <v-container
+        fluid
+    >
+        <h1>{{$t('services.headerList')}}</h1>
+        <ServiceList v-on:edit="editService"></ServiceList>
+        <ServiceInsert></ServiceInsert>
+        <ServiceEdit
+                v-if="edit"
+                v-bind:service="edit"
+                v-on:cancel="edit=null"
+                v-on:submit="edit=null"
+        ></ServiceEdit>
+    </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { RxHeroDocument } from '../RxDB';
+    import {Component, Vue} from 'vue-property-decorator';
+    import {RxServiceDocument} from '@/RxDB';
 
-import HeroList from '../components/HeroList.vue';
-import ServiceInsert from '../components/ServiceInsert.vue';
+    import ServiceInsert from '../components/service/ServiceInsert.vue';
+    import ServiceList from '@/components/service/ServiceList.vue';
+    import ServiceEdit from '@/components/service/ServiceEdit.vue';
 
-@Component({
-  components: {
-    HeroList,
-    ServiceInsert,
-  }
-})
-export default class Home extends Vue {
-  private edit: RxHeroDocument | null = null;
-  private dialog: boolean = false;
+    @Component({
+        components: {
+            ServiceList,
+            ServiceInsert,
+            ServiceEdit
+        }
+    })
+    export default class Services extends Vue {
+        private edit: RxServiceDocument | null = null;
 
-  private editHero(hero: RxHeroDocument) {
-    this.edit = hero;
-  }
-}
+        private editService(service: RxServiceDocument) {
+            this.edit = service;
+        }
+    }
 </script>

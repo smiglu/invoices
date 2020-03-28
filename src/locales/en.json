@@ -3,7 +3,9 @@
     "save": "Save",
     "cancel": "Cancel",
     "additional": "Additional",
-    "back": "Back"
+    "back": "Back",
+    "action": "Actions",
+    "search": "Search"
   },
   "contractors" : {
     "header": "Contractors",
@@ -25,5 +27,12 @@
     "nameOfTheAuthority": "Issuing authority name",
     "bankName": "Nazwa banku",
     "accountNumber": "Numer konta"
+  },
+  "services" : {
+    "header": "Services",
+    "headerList": "Services list",
+    "name": "Name of service",
+    "price": "Price",
+    "unit": "Unit"
   }
 }

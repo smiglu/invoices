@@ -33,6 +33,12 @@ export interface RxContractorDocumentType {
     accountNumber: string;
 }
 
+export interface RxServiceDocumentType {
+    name: string;
+    price: number;
+    unit: string;
+}
+
 // ORM methods
 interface RxHeroDocMethods {
     hpPercent(): number;
@@ -44,6 +50,9 @@ export type RxHeroCollection = RxCollection<RxHeroDocumentType, RxHeroDocMethods
 export type RxContractorDocument = RxDocument<RxContractorDocumentType>;
 export type RxContractorCollection = RxCollection<RxContractorDocumentType, {}, {}>;
 
+export type RxServiceDocument = RxDocument<RxServiceDocumentType>;
+export type RxServiceCollection = RxCollection<RxServiceDocumentType, {}, {}>;
+
 export interface RxHeroesCollections {
     heroes: RxHeroCollection;
 }
@@ -52,6 +61,12 @@ export interface RxContractorsCollections {
     contractors: RxContractorCollection;
 }
 
+export interface RxServicesCollections {
+    services: RxServiceCollection;
+}
+
 export type RxHeroesDatabase = RxDatabase<RxHeroesCollections>;
 
 export type RxContractorsDatabase = RxDatabase<RxContractorsCollections>;
+
+export type RxServicesDatabase = RxDatabase<RxServicesCollections>;

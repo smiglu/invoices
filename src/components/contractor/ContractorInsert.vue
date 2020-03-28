@@ -145,25 +145,6 @@
                                     />
                                 </v-col>
                             </v-row>
-                            <v-col cols="12" class="d-none">
-                                <v-text-field
-                                    prepend-icon="mdi-mail"
-                                    placeholder="Email"
-                                />
-                            </v-col>
-                            <v-col cols="12" class="d-none">
-                                <v-text-field
-                                    type="tel"
-                                    prepend-icon="mdi-phone"
-                                    placeholder="(+48) 000 - 0000"
-                                />
-                            </v-col>
-                            <v-col cols="12" class="d-none">
-                                <v-text-field
-                                    prepend-icon="mdi-text"
-                                    placeholder="Notes"
-                                />
-                            </v-col>
                         </v-row>
                     </v-container>
                     <v-card-actions>

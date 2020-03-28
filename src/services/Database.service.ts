@@ -7,7 +7,7 @@ import {
     RxContractorDocumentType,
     RxContractorDocument,
     RxContractorsDatabase,
-    RxContractorsCollections
+    RxContractorsCollections, RxServicesDatabase, RxServicesCollections, RxServiceDocumentType, RxServiceDocument
 } from '@/RxDB';
 
 import heroSchema from '../schemas/Hero.schema';
@@ -47,6 +47,7 @@ RxDB.plugin(PouchdbAdapterHttp);
 
 
 import * as PouchdbAdapterIdb from 'pouchdb-adapter-idb';
+import schemaService from '@/schemas/Service.schema';
 RxDB.plugin(PouchdbAdapterIdb);
 const useAdapter = 'idb';
 
@@ -89,6 +90,14 @@ const contractorCollections = [
                 };
             }
         }
+    }
+];
+
+const serviceCollections = [
+    {
+        name: 'services',
+        schema: schemaService,
+        sync: true
     }
 ];
 
@@ -195,6 +204,55 @@ async function _createContractors(): Promise<RxContractorsDatabase> {
     return db;
 }
 
+/**
+ * creates the database
+ */
+async function _createServices(): Promise<RxServicesDatabase> {
+    console.log('DatabaseService: creating database..');
+    const db = await RxDB.create<RxServicesCollections>({
+        name: 'services',
+        adapter: useAdapter,
+        queryChangeDetection: true
+        // password: 'myLongAndStupidPassword' // no password needed
+    });
+    console.log('DatabaseService: created database');
+    (window as any).db = db; // write to window for debugging
+    // show leadership in title
+    db.waitForLeadership()
+        .then(() => {
+            console.log('isLeader now');
+            document.title = '♛ ' + document.title;
+        });
+
+    // create collections
+    console.log('DatabaseService: create collections');
+    await Promise.all(serviceCollections.map((colData) => db.collection(colData)));
+
+    // hooks
+    console.log('DatabaseService: add hooks');
+    db.collections.services.preInsert((docObj: RxServiceDocumentType) => {
+        const name = docObj.name;
+        return db.collections.services.findOne({ name }).exec()
+            .then((has: RxServiceDocument | null) => {
+                if (has != null) {
+                    alert('another hero already has the color ' + name);
+                    throw new Error('color already there');
+                }
+                return db;
+            });
+    }, false);
+
+    // sync with server
+    console.log('DatabaseService: sync');
+    await db.services.sync({
+        remote: syncURL + '/service'
+    });
+
+
+
+    return db;
+}
+
 const DatabaseService = {
     DB_CREATE_PROMISE: _create(),
     get(): Promise<RxHeroesDatabase> {
@@ -203,6 +261,10 @@ const DatabaseService = {
     DB_CONTRACTORS_CREATE_PROMISE: _createContractors(),
     getContractors(): Promise<RxContractorsDatabase> {
         return this.DB_CONTRACTORS_CREATE_PROMISE;
+    },
+    DB_SERVICES_CREATE_PROMISE: _createServices(),
+    getServices(): Promise<RxServicesDatabase> {
+        return this.DB_SERVICES_CREATE_PROMISE;
     }
 };
 

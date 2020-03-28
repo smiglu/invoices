@@ -1,5 +1,7 @@
 <template>
-    <v-container>
+    <v-container
+        fluid
+    >
         <h1>{{$t('contractors.headerList')}}</h1>
         <ContractorList v-on:edit="editContractor"></ContractorList>
         <ContractorInsert></ContractorInsert>
