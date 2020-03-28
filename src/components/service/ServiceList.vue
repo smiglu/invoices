@@ -4,25 +4,25 @@
             {{$t('services.header')}}
             <v-spacer></v-spacer>
             <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    v-bind:label="$t('common.search')"
-                    single-line
-                    hide-details
-                    clearable
+                v-model="search"
+                append-icon="mdi-magnify"
+                v-bind:label="$t('common.search')"
+                single-line
+                hide-details
+                clearable
             ></v-text-field>
         </v-card-title>
         <v-data-table
-                :headers="headers"
-                :items="services"
-                :search="search"
-                :loading="loading"
-                loading-text="Loading... Please wait"
-                :pagination.sync="pagination"
-                :footer-props="{
-                    showFirstLastPage: true,
-                    itemsPerPageText: 'Liczba elementów na stronie:'
-            }">
+            :headers="headers"
+            :items="services"
+            :search="search"
+            :loading="loading"
+            loading-text="Loading... Please wait"
+            :pagination.sync="pagination"
+            :footer-props="{
+                showFirstLastPage: true,
+                itemsPerPageText: 'Liczba elementów na stronie:'
+        }">
             >
             <template v-slot:item.actions="{ item }">
                 <v-icon
