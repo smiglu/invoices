@@ -3,8 +3,12 @@
         <h1>{{$t('contractors.headerList')}}</h1>
         <ContractorList v-on:edit="editContractor"></ContractorList>
         <ContractorInsert></ContractorInsert>
-        <ContractorEdit v-if="edit" v-bind:contractor="edit" v-on:cancel="edit=null"
-                        v-on:submit="edit=null"></ContractorEdit>
+        <ContractorEdit
+                v-if="edit"
+                v-bind:contractor="edit"
+                v-on:cancel="edit=null"
+                v-on:submit="edit=null"
+        ></ContractorEdit>
     </v-container>
 </template>
 
