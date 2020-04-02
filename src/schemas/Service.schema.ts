@@ -12,16 +12,22 @@ const schemaService: RxJsonSchema = {
             type: 'string',
             default: ''
         },
-        price: {
-            type: 'string',
-            default: ''
+        netAmount: {
+            type: 'number',
+            default: 0
+        },
+        vat: {
+            type: 'number',
+            default: 0,
+            minimum: 0,
+            maximum: 23
         },
         unit: {
             type: 'string',
             default: ''
         }
     },
-    required: ['name', 'price', 'unit']
+    required: ['name', 'netAmount', 'unit']
 };
 
 export default schemaService;

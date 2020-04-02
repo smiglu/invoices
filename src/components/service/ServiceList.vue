@@ -4,22 +4,21 @@
             {{$t('services.header')}}
             <v-spacer></v-spacer>
             <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                v-bind:label="$t('common.search')"
-                single-line
-                hide-details
-                clearable
+                    v-model="search"
+                    append-icon="mdi-magnify"
+                    v-bind:label="$t('common.search')"
+                    single-line
+                    hide-details
+                    clearable
             ></v-text-field>
         </v-card-title>
         <v-data-table
-            :headers="headers"
-            :items="services"
-            :search="search"
-            :loading="loading"
-            loading-text="Loading... Please wait"
-            :pagination.sync="pagination"
-            :footer-props="{
+                :headers="headers"
+                :items="services"
+                :search="search"
+                :loading="loading"
+                loading-text="Loading... Please wait"
+                :footer-props="{
                 showFirstLastPage: true,
                 itemsPerPageText: 'Liczba elementów na stronie:'
         }">
@@ -60,7 +59,9 @@
         private search: string = '';
         private headers = [
             {text: `${this.$root.$t('services.name')}`, value: 'name'},
-            {text: `${this.$root.$t('services.price')}`, value: 'price'},
+            {text: `${this.$root.$t('services.price')}`, value: 'netAmount'},
+            {text: `${this.$root.$t('services.vat')}`, value: 'vat'},
+            {text: `${this.$root.$t('services.grossAmount')}`, value: 'grossAmount()'},
             {text: `${this.$root.$t('services.unit')}`, value: 'unit'},
             {text: `${this.$root.$t('common.action')}`, value: 'actions', sortable: false}
         ];

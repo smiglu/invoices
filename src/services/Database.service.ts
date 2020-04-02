@@ -34,20 +34,25 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 import RxDBValidateModule from 'rxdb/plugins/validate';
+
 RxDB.plugin(RxDBValidateModule);
 
 import RxDBLeaderElectionModule from 'rxdb/plugins/leader-election';
+
 RxDB.plugin(RxDBLeaderElectionModule);
 
 import RxDBReplicationModule from 'rxdb/plugins/replication';
+
 RxDB.plugin(RxDBReplicationModule);
 // always needed for replication with the node-server
 import * as PouchdbAdapterHttp from 'pouchdb-adapter-http';
+
 RxDB.plugin(PouchdbAdapterHttp);
 
 
 import * as PouchdbAdapterIdb from 'pouchdb-adapter-idb';
 import schemaService from '@/schemas/Service.schema';
+
 RxDB.plugin(PouchdbAdapterIdb);
 const useAdapter = 'idb';
 
@@ -72,21 +77,21 @@ const contractorCollections = [
         migrationStrategies: {
             // 1 means, this transforms data from version 0 to version 1
             1(oldDoc: any) {
-            return {
-                    name : oldDoc.name,
-                    companyName : '',
-                    pesel : '',
-                    zipCode : '',
-                    placeOfMail : '',
-                    address : '',
-                    nipNumber : '',
-                    representation : '',
-                    documentName : '',
-                    seriesAndNumber : '',
-                    documentReleaseDate : '',
-                    nameOfTheAuthority : '',
-                    bankName : '',
-                    accountNumber : ''
+                return {
+                    name: oldDoc.name,
+                    companyName: '',
+                    pesel: '',
+                    zipCode: '',
+                    placeOfMail: '',
+                    address: '',
+                    nipNumber: '',
+                    representation: '',
+                    documentName: '',
+                    seriesAndNumber: '',
+                    documentReleaseDate: '',
+                    nameOfTheAuthority: '',
+                    bankName: '',
+                    accountNumber: ''
                 };
             }
         }
@@ -97,7 +102,12 @@ const serviceCollections = [
     {
         name: 'services',
         schema: schemaService,
-        sync: true
+        sync: true,
+        methods: {
+            grossAmount(this: RxServiceDocument): number {
+                return this.netAmount * (1 + (this.vat / 100));
+            }
+        }
     }
 ];
 
@@ -105,8 +115,9 @@ console.log('hostname: ' + window.location.hostname);
 const syncURL = 'http://' + window.location.hostname + ':10101/';
 
 let doSync = true;
-if (window.location.hash === '#nosync') { doSync = false; }
-
+if (window.location.hash === '#nosync') {
+    doSync = false;
+}
 
 /**
  * creates the database
@@ -137,7 +148,7 @@ async function _create(): Promise<RxHeroesDatabase> {
     console.log('DatabaseService: add hooks');
     db.collections.heroes.preInsert((docObj: RxHeroDocumentType) => {
         const color = docObj.color;
-        return db.collections.heroes.findOne({ color }).exec()
+        return db.collections.heroes.findOne({color}).exec()
             .then((has: RxHeroDocument | null) => {
                 if (has != null) {
                     alert('another hero already has the color ' + color);
@@ -185,7 +196,7 @@ async function _createContractors(): Promise<RxContractorsDatabase> {
     console.log('DatabaseService: add hooks');
     db.collections.contractors.preInsert((docObj: RxContractorDocumentType) => {
         const name = docObj.name;
-        return db.collections.contractors.findOne({ name }).exec()
+        return db.collections.contractors.findOne({name}).exec()
             .then((has: RxContractorDocument | null) => {
                 if (has != null) {
                     alert('another hero already has the color ' + name);
@@ -218,6 +229,7 @@ async function _createServices(): Promise<RxServicesDatabase> {
     console.log('DatabaseService: created database');
     (window as any).db = db; // write to window for debugging
     // show leadership in title
+
     db.waitForLeadership()
         .then(() => {
             console.log('isLeader now');
@@ -232,7 +244,7 @@ async function _createServices(): Promise<RxServicesDatabase> {
     console.log('DatabaseService: add hooks');
     db.collections.services.preInsert((docObj: RxServiceDocumentType) => {
         const name = docObj.name;
-        return db.collections.services.findOne({ name }).exec()
+        return db.collections.services.findOne({name}).exec()
             .then((has: RxServiceDocument | null) => {
                 if (has != null) {
                     alert('another hero already has the color ' + name);
@@ -247,8 +259,6 @@ async function _createServices(): Promise<RxServicesDatabase> {
     await db.services.sync({
         remote: syncURL + '/service'
     });
-
-
 
     return db;
 }

@@ -46,17 +46,25 @@
                                 </v-row>
                             </v-col>
                             <v-row>
-                                <v-col cols="7">
+                                <v-col cols="4">
                                     <v-text-field
-                                            v-model="formData.price"
-                                            v-bind:placeholder="$t('services.nameOfTheAuthority')"
+                                            v-model="formData.netAmount"
+                                            v-bind:placeholder="$t('services.price')"
+                                            type="number"
+                                    />
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-text-field
+                                            v-model="formData.vat"
+                                            v-bind:placeholder="$t('services.vat')"
+                                            type="number"
                                     />
                                 </v-col>
                                 <v-col cols="5">
                                     <v-select
                                             :items="unitTypes"
                                             v-model="formData.unit"
-                                            v-bind:label="$t('services.documentName')"
+                                            v-bind:label="$t('services.unitTypes')"
                                     ></v-select>
                                 </v-col>
                             </v-row>
@@ -85,32 +93,49 @@
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
     import DatabaseService from '../../services/Database.service';
-    import {RxServicesDatabase} from '@/RxDB';
+    import {RxServiceDocumentType, RxServicesDatabase} from '@/RxDB';
 
     @Component({})
     export default class ServiceInsert extends Vue {
         private name: string = '';
-        private formData = {
+        private formData: RxServiceDocumentType = {
             name : '',
-            price : 0,
-            unit : '',
+            netAmount : 0,
+            vat : 0,
+            unit : ''
         };
         private dialog: boolean = false;
         private unitTypes = [{
-            text: `${this.$root.$t('services.idCard')}`,
-            value: 'D'
+            text: `${this.$root.$t('services.units.mb')}`,
+            value: 'mb'
         },
         {
-            text: `${this.$root.$t('services.passport')}`,
-            value: 'P'
+            text: `${this.$root.$t('services.units.m2')}`,
+            value: 'm2'
         },
         {
-            text: `${this.$root.$t('services.others')}`,
-            value: 'O'
+            text: `${this.$root.$t('services.units.szt')}`,
+            value: 'szt'
+        },
+        {
+            text: `${this.$root.$t('services.units.kpl')}`,
+            value: 'kpl'
+        },
+        {
+            text: `${this.$root.$t('services.units.rG')}`,
+            value: 'r-g'
+        },
+        {
+            text: `${this.$root.$t('services.units.km')}`,
+            value: 'km'
         }];
 
         public async onSubmit() {
             const db: RxServicesDatabase = await DatabaseService.getServices();
+
+            this.formData.netAmount = Number(this.formData.netAmount);
+            this.formData.vat = Number(this.formData.vat);
+
             await db.services.insert(this.formData);
 
             this.name = '';

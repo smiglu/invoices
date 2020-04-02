@@ -33,6 +33,14 @@
     "headerList": "Services list",
     "name": "Name of service",
     "price": "Price",
-    "unit": "Unit"
+    "unit": "Unit",
+    "units": {
+      "mb": "Running meter(mb)",
+      "m2": "Square meter(m2)",
+      "szt": "item",
+      "kpl": "Sets",
+      "rG": "Work hour",
+      "km": "Kilometers"
+    }
   }
 }

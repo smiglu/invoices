@@ -35,10 +35,18 @@
                                 </v-row>
                             </v-col>
                             <v-row>
-                                <v-col cols="7">
+                                <v-col cols="4">
                                     <v-text-field
-                                            v-model="formData.price"
-                                            v-bind:placeholder="$t('services.nameOfTheAuthority')"
+                                            v-model="formData.netAmount"
+                                            v-bind:placeholder="$t('services.price')"
+                                            type="number"
+                                    />
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-text-field
+                                            v-model="formData.vat"
+                                            v-bind:placeholder="$t('services.vat')"
+                                            type="number"
                                     />
                                 </v-col>
                                 <v-col cols="5">
@@ -89,7 +97,8 @@
         private dialog: boolean = true;
         private formData: RxServiceDocumentType = {
             name: '',
-            price: 0,
+            netAmount: 0,
+            vat: 0,
             unit: ''
         };
         private documentsType = [{
@@ -108,7 +117,8 @@
         public async mounted() {
             this.formData = {
                 name: this.service.name,
-                price: this.service.price,
+                netAmount: Number(this.service.netAmount),
+                vat: Number(this.service.vat),
                 unit: this.service.unit,
             };
             this.service.$.pipe(
@@ -130,7 +140,8 @@
             await this.service.update({
                 $set: {
                     name: this.formData.name,
-                    price: this.formData.price,
+                    netAmount: Number(this.formData.netAmount),
+                    vat: Number(this.formData.vat),
                     unit: this.formData.unit
                 }
             });

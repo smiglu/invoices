@@ -1,5 +1,5 @@
 {
-  "common" : {
+  "common": {
     "save": "Zapisz",
     "cancel": "Anuluj",
     "additional": "Dodatkowe",
@@ -7,7 +7,7 @@
     "action": "Akcje",
     "search": "Szukaj"
   },
-  "contractors" : {
+  "contractors": {
     "header": "Kontrahenci",
     "headerList": "Lista kontrahentów",
     "createContractor": "Stwórz kontrahenta",
@@ -28,11 +28,19 @@
     "bankName": "Nazwa banku",
     "accountNumber": "Numer konta"
   },
-  "services" : {
+  "services": {
     "header": "Usługi",
     "headerList": "Lista usług",
     "name": "Nazwa usługi",
     "price": "Cena",
-    "unit": "Jednostka"
+    "unit": "Jednostka",
+    "units": {
+      "mb": "Metry bieżące(mb)",
+      "m2": "Metry kwadratowe(m2)",
+      "szt": "Sztuk",
+      "kpl": "Kąpletów",
+      "rG": "Roboto godziny",
+      "km": "Kilometry"
+    }
   }
 }

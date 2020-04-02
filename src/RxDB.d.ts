@@ -35,7 +35,8 @@ export interface RxContractorDocumentType {
 
 export interface RxServiceDocumentType {
     name: string;
-    price: number;
+    netAmount: number;
+    vat: number;
     unit: string;
 }
 
@@ -44,14 +45,18 @@ interface RxHeroDocMethods {
     hpPercent(): number;
 }
 
+interface RxServiceDocMethods {
+    grossAmount(): number;
+}
+
 export type RxHeroDocument = RxDocument<RxHeroDocumentType, RxHeroDocMethods>;
 export type RxHeroCollection = RxCollection<RxHeroDocumentType, RxHeroDocMethods, {}>;
 
 export type RxContractorDocument = RxDocument<RxContractorDocumentType>;
 export type RxContractorCollection = RxCollection<RxContractorDocumentType, {}, {}>;
 
-export type RxServiceDocument = RxDocument<RxServiceDocumentType>;
-export type RxServiceCollection = RxCollection<RxServiceDocumentType, {}, {}>;
+export type RxServiceDocument = RxDocument<RxServiceDocumentType, RxServiceDocMethods>;
+export type RxServiceCollection = RxCollection<RxServiceDocumentType, RxServiceDocMethods, {}>;
 
 export interface RxHeroesCollections {
     heroes: RxHeroCollection;

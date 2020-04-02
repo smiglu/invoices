@@ -106,6 +106,7 @@
                     <v-img
                         src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
                         alt="Vuetify"
+                        @click="changeThemeColor"
                     />
                 </v-avatar>
             </v-btn>
@@ -162,5 +163,10 @@
                 {icon: 'mdi-help-circle', text: 'Pomoc'},
             ],
         }),
+        methods: {
+            changeThemeColor() {
+                this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+            }
+        }
     });
 </script>
