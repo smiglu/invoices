@@ -38,7 +38,7 @@
                                 <v-col cols="4">
                                     <v-text-field
                                             v-model="formData.netAmount"
-                                            v-bind:placeholder="$t('services.price')"
+                                            v-bind:placeholder="$t('services.netAmount')"
                                             type="number"
                                     />
                                 </v-col>
@@ -51,9 +51,9 @@
                                 </v-col>
                                 <v-col cols="5">
                                     <v-select
-                                            :items="documentsType"
+                                            :items="unitTypes"
                                             v-model="formData.unit"
-                                            v-bind:label="$t('services.documentName')"
+                                            v-bind:label="$t('services.unit')"
                                     ></v-select>
                                 </v-col>
                             </v-row>
@@ -101,18 +101,32 @@
             vat: 0,
             unit: ''
         };
-        private documentsType = [{
-            text: `${this.$root.$t('services.idCard')}`,
-            value: 'D'
+        private unitTypes = [
+            {
+                text: `${this.$root.$t('services.units.mb')}`,
+                value: 'mb'
             },
             {
-                text: `${this.$root.$t('services.passport')}`,
-                value: 'P'
+                text: `${this.$root.$t('services.units.m2')}`,
+                value: 'm2'
             },
             {
-                text: `${this.$root.$t('services.others')}`,
-                value: 'O'
-            }];
+                text: `${this.$root.$t('services.units.szt')}`,
+                value: 'szt'
+            },
+            {
+                text: `${this.$root.$t('services.units.kpl')}`,
+                value: 'kpl'
+            },
+            {
+                text: `${this.$root.$t('services.units.rG')}`,
+                value: 'r-g'
+            },
+            {
+                text: `${this.$root.$t('services.units.km')}`,
+                value: 'km'
+            }
+        ];
 
         public async mounted() {
             this.formData = {

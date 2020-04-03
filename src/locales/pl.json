@@ -32,8 +32,10 @@
     "header": "Usługi",
     "headerList": "Lista usług",
     "name": "Nazwa usługi",
-    "price": "Cena",
+    "netAmount": "Cena netto",
     "unit": "Jednostka",
+    "vat": "Vat",
+    "grossAmount": "Cena brutto",
     "units": {
       "mb": "Metry bieżące(mb)",
       "m2": "Metry kwadratowe(m2)",

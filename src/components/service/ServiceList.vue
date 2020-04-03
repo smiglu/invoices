@@ -23,6 +23,12 @@
                 itemsPerPageText: 'Liczba elementów na stronie:'
         }">
             >
+            <template v-slot:item.vat="{ item }">
+                {{ item.vat }}%
+            </template>
+            <template v-slot:item.grossAmount="{ item }">
+                {{ item.grossAmount() }}
+            </template>
             <template v-slot:item.actions="{ item }">
                 <v-icon
                         small
@@ -59,9 +65,9 @@
         private search: string = '';
         private headers = [
             {text: `${this.$root.$t('services.name')}`, value: 'name'},
-            {text: `${this.$root.$t('services.price')}`, value: 'netAmount'},
+            {text: `${this.$root.$t('services.netAmount')}`, value: 'netAmount'},
             {text: `${this.$root.$t('services.vat')}`, value: 'vat'},
-            {text: `${this.$root.$t('services.grossAmount')}`, value: 'grossAmount()'},
+            {text: `${this.$root.$t('services.grossAmount')}`, value: 'grossAmount'},
             {text: `${this.$root.$t('services.unit')}`, value: 'unit'},
             {text: `${this.$root.$t('common.action')}`, value: 'actions', sortable: false}
         ];

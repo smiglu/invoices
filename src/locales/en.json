@@ -32,8 +32,10 @@
     "header": "Services",
     "headerList": "Services list",
     "name": "Name of service",
-    "price": "Price",
+    "netAmount": "Net amount",
     "unit": "Unit",
+    "vat": "Vat",
+    "grossAmount": "Gross amount",
     "units": {
       "mb": "Running meter(mb)",
       "m2": "Square meter(m2)",

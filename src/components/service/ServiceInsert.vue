@@ -1,19 +1,19 @@
 <template>
     <div class="insert">
         <v-btn
-            color="pink"
-            dark
-            fab
-            fixed
-            right
-            bottom
-            @click="dialog = !dialog"
+                color="pink"
+                dark
+                fab
+                fixed
+                right
+                bottom
+                @click="dialog = !dialog"
         >
             <v-icon>mdi-plus</v-icon>
         </v-btn>
         <v-dialog
-            v-model="dialog"
-            width="800px"
+                v-model="dialog"
+                width="800px"
         >
             <form v-on:submit.prevent="onSubmit" name="insertForm">
                 <v-card>
@@ -23,25 +23,25 @@
                     <v-container>
                         <v-row no-gutters>
                             <v-col
-                                class="align-center justify-space-between"
-                                cols="12"
+                                    class="align-center justify-space-between"
+                                    cols="12"
                             >
                                 <v-row
-                                    align="center"
-                                    class="mr-0"
+                                        align="center"
+                                        class="mr-0"
                                 >
                                     <v-avatar
-                                        size="40px"
-                                        class="mx-3"
+                                            size="40px"
+                                            class="mx-3"
                                     >
                                         <img
-                                            src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
-                                            alt=""
+                                                src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
+                                                alt=""
                                         >
                                     </v-avatar>
                                     <v-text-field
-                                        v-model="formData.name"
-                                        v-bind:placeholder="$t('services.name')"
+                                            v-model="formData.name"
+                                            v-bind:placeholder="$t('services.name')"
                                     />
                                 </v-row>
                             </v-col>
@@ -49,7 +49,7 @@
                                 <v-col cols="4">
                                     <v-text-field
                                             v-model="formData.netAmount"
-                                            v-bind:placeholder="$t('services.price')"
+                                            v-bind:placeholder="$t('services.netAmount')"
                                             type="number"
                                     />
                                 </v-col>
@@ -64,7 +64,7 @@
                                     <v-select
                                             :items="unitTypes"
                                             v-model="formData.unit"
-                                            v-bind:label="$t('services.unitTypes')"
+                                            v-bind:label="$t('services.unit')"
                                     ></v-select>
                                 </v-col>
                             </v-row>
@@ -73,14 +73,14 @@
                     <v-card-actions>
                         <v-spacer/>
                         <v-btn
-                            text
-                            color="primary"
-                            @click="dialog = false"
+                                text
+                                color="primary"
+                                @click="dialog = false"
                         >{{ $t('common.cancel')}}
                         </v-btn>
                         <v-btn
-                            text
-                            @click="onSubmit()"
+                                text
+                                @click="onSubmit()"
                         >{{ $t('common.save')}}
                         </v-btn>
                     </v-card-actions>
@@ -99,36 +99,38 @@
     export default class ServiceInsert extends Vue {
         private name: string = '';
         private formData: RxServiceDocumentType = {
-            name : '',
-            netAmount : 0,
-            vat : 0,
-            unit : ''
+            name: '',
+            netAmount: 0,
+            vat: 0,
+            unit: ''
         };
         private dialog: boolean = false;
-        private unitTypes = [{
-            text: `${this.$root.$t('services.units.mb')}`,
-            value: 'mb'
-        },
-        {
-            text: `${this.$root.$t('services.units.m2')}`,
-            value: 'm2'
-        },
-        {
-            text: `${this.$root.$t('services.units.szt')}`,
-            value: 'szt'
-        },
-        {
-            text: `${this.$root.$t('services.units.kpl')}`,
-            value: 'kpl'
-        },
-        {
-            text: `${this.$root.$t('services.units.rG')}`,
-            value: 'r-g'
-        },
-        {
-            text: `${this.$root.$t('services.units.km')}`,
-            value: 'km'
-        }];
+        private unitTypes = [
+            {
+                text: `${this.$root.$t('services.units.mb')}`,
+                value: 'mb'
+            },
+            {
+                text: `${this.$root.$t('services.units.m2')}`,
+                value: 'm2'
+            },
+            {
+                text: `${this.$root.$t('services.units.szt')}`,
+                value: 'szt'
+            },
+            {
+                text: `${this.$root.$t('services.units.kpl')}`,
+                value: 'kpl'
+            },
+            {
+                text: `${this.$root.$t('services.units.rG')}`,
+                value: 'r-g'
+            },
+            {
+                text: `${this.$root.$t('services.units.km')}`,
+                value: 'km'
+            }
+        ];
 
         public async onSubmit() {
             const db: RxServicesDatabase = await DatabaseService.getServices();
